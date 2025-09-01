@@ -41,3 +41,11 @@ const deleteUser = async (id) => {
   }
   return userDelete;
 };
+
+module.exports = {
+  getAllUser,
+  getUserById,
+  getUserByPage,
+  updateUser,
+  deleteUser,
+};
