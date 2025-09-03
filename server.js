@@ -18,6 +18,6 @@ app.use("/api/auth/", authRouter);
 app.use("/api/user/", userRouter);
 app.use("/api/project/", projectRouter);
 
-app.listen(process.env.PORT | 5000, () => {
-  console.log("Server running on port ", process.env.PORT);
+app.listen(process.env.PORT || 5000, () => {
+  console.log("Server running on port ", process.env.PORT || 5000);
 });
