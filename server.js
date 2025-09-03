@@ -5,6 +5,7 @@ const db = require("./config/db");
 const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRouter");
 const projectRouter = require("./routes/projectRouter");
+const enrollRouter = require("./routes/enrollRouter");
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ db(process.env.MONGO_URI);
 app.use("/api/auth/", authRouter);
 app.use("/api/user/", userRouter);
 app.use("/api/project/", projectRouter);
+app.use("/api/enroll/", enrollRouter);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("Server running on port ", process.env.PORT || 5000);
