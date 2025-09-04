@@ -7,8 +7,9 @@ const userController = require("../controllers/userController");
 
 router.get("/all", authMiddleware, userController.getAllUser);
 router.get("/page", authMiddleware, userController.getUserByPage);
+router.get("/search", authMiddleware, userController.searchUser);
 router.get("/:id", authMiddleware, userController.getUserById);
-router.get("/update/:id", authMiddleware, userController.updateUser);
-router.get("/delete/:id", authMiddleware, userController.deleteUser);
+router.put("/update/:id", authMiddleware, userController.updateUser);
+router.delete("/delete/:id", authMiddleware, userController.deleteUser);
 
 module.exports = router;
