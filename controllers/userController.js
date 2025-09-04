@@ -19,6 +19,16 @@ const getUserByPage = async (req, res) => {
   }
 };
 
+const searchUser = async (req, res) => {
+  try {
+    const { query, page = 1, limit = 10 } = req.query;
+    const userPage = await userService.searchUsers(query, page, limit);
+    res.status(200).json({ message: "Search user page success", userPage });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -54,6 +64,7 @@ module.exports = {
   getAllUser,
   getUserByPage,
   getUserById,
+  searchUser,
   updateUser,
   deleteUser,
 };

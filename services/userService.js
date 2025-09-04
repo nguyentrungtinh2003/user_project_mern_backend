@@ -21,6 +21,22 @@ const getUserByPage = async (page = 1, limit = 10) => {
   return { userPage, page, totalUser, totalPage };
 };
 
+const searchUsers = async (query, page = 1, limit = 10) => {
+  const skip = (page - 1) * limit;
+
+  const userPage = await User.find({
+    username: { $regex: query, $options: "i" },
+  })
+    .skip(skip)
+    .limit(limit);
+  const totalUser = await User.countDocuments({
+    username: { $regex: query, $options: "i" },
+  });
+  const totalPage = Math.ceil(totalUser / limit);
+
+  return { userPage, page, totalUser, totalPage };
+};
+
 const updateUser = async (id, user) => {
   const userUpdate = await User.findByIdAndUpdate(id, user, {
     new: true,
@@ -46,6 +62,7 @@ module.exports = {
   getAllUser,
   getUserById,
   getUserByPage,
+  searchUsers,
   updateUser,
   deleteUser,
 };
