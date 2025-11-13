@@ -58,6 +58,21 @@ const deleteUser = async (id) => {
   return userDelete;
 };
 
+const uploadImageUser = async (id, url) => {
+  const userUploadImage = await User.findByIdAndUpdate(
+    id,
+    { image: url },
+    {
+      new: true,
+      runValidators: true,
+    }
+  ).select("-password");
+  if (!userUploadImage) {
+    throw new Error("No image uploaded.");
+  }
+  return userUploadImage;
+};
+
 module.exports = {
   getAllUser,
   getUserById,
@@ -65,4 +80,5 @@ module.exports = {
   searchUsers,
   updateUser,
   deleteUser,
+  uploadImageUser,
 };

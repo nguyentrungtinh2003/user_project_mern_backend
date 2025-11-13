@@ -26,7 +26,7 @@ const login = async ({ username, password }) => {
   if (!isMatch) {
     throw new Error("mật khẩu không đúng");
   }
-  const token = await jwt.sign(
+  const token = jwt.sign(
     {
       id: user._id,
       role: user.role,
@@ -34,6 +34,10 @@ const login = async ({ username, password }) => {
     process.env.JWT_SECRET,
     { expiresIn: "1h" }
   );
+
+  const { password: _pw, ...safeUser } = user.toObject ? user.toObject() : user;
+
+  return { token, user: safeUser };
 };
 
 module.exports = { register, login };
